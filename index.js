@@ -31,11 +31,18 @@ function userInput() {
         }])
         .then(
             function ({ name, id, email, role }) {
-                case "Engineer":
-                inquirer
-                    .prompt({
-                        type: ""
-                    })
-            }
+                switch (role) {
+                    case "Engineer":
+                        inquirer
+                            .prompt({
+                                type: "input",
+                                message: "Enter GitHub user-name.",
+                                name: "github"
+                            }).then(
+                                function ({ github }) {
+                                    generateEngineer(name, id, email, github)
+                                })
+                })
+}
         )
 }
