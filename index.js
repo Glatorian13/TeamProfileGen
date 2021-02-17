@@ -1,12 +1,19 @@
 //ES6-style module import (thanks vs-code)
-import fs from "fs";
-import inquirer from "inquirer";
-import jest from "jest";
+const fs = require("fs");
+const inquirer = require("inquirer");
+const jest = require("jest");
 //require constructors in lib library
 const Employee = "./lib/Employee";
 const Manager = "./lib/Manager";
 const Engineer = "./lib/Engineer";
 const Intern = "./lib/Intern";
+//render html files based off templates
+let renderFile = require("./render");
+const generateEngineer = renderFile.createEngineer;
+const generateManager = renderFile.createManager;
+const generateIntern = renderFile.createIntern;
+// remove above later??
+
 
 //run inquirer to gather input data
 function userInput() {
@@ -46,19 +53,56 @@ function userInput() {
             .then(function ({ github }) {
               generateEngineer(name, id, email, github);
               addMember();
-            }) 
-            break 
-            case "Intern":
-                inquirer
-                .prompt({
-                    type: "input",
-                    message: "Enter school attended.",
-                    name: "school"
-                }).then(
-                    function ({ school }) {
-                        generateIntern
-                    }
-                )
+            });
+          break;
+        case "Intern":
+          inquirer
+            .prompt({
+              type: "input",
+              message: "Enter school attended.",
+              name: "school",
+            })
+            .then(function ({ school }) {
+              generateIntern(name, id, email, school);
+              addMember();
+            });
+          break;
+        case "Manager":
+          inquirer
+            .prompt({
+              type: "input",
+              message: "Office number?",
+              name: "officeNum",
+            })
+            .then(function ({ officeNum }) {
+              generateManager(name, id, email, officeNum);
+              addMember();
+            });
+          break;
+      }
+    });
+}
+
+(addMember) => {
+  inquirer
+    .prompt({
+      type: "confirm",
+      message: "Add more Team Members?",
+      name: "addMember",
+    })
+    .then(function ({ addMember }) {
+      console.log("add other members", addMember);
+      if (addMember) {
+        userInput();
+      } else {
+        renderHTML();
       }
     })
-}
+    .catch((err) => {
+      console.log("Problem adding more team members", err);
+      throw err;
+    });
+};
+
+userInput();
+
