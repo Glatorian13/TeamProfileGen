@@ -1,29 +1,29 @@
 {
   "name": "teamprofilegen",
   "version": "1.0.0",
-  "description": "## Your Task",
+  "description": "Generate a profile for your team.",
   "main": "index.js",
   "directories": {
     "lib": "lib",
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Glatorian13/TeamProfileGen.git"
   },
-  "author": "",
+  "author": "Javier Cardenas",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Glatorian13/TeamProfileGen/issues"
   },
   "homepage": "https://github.com/Glatorian13/TeamProfileGen#readme",
   "dependencies": {
-    "fs": "^0.0.1-security",
+    "ejs": "^3.1.6",
     "inquirer": "^7.3.3",
     "jest": "^26.6.3"
-  },
-  "devDependencies": {}
+  }
 }
