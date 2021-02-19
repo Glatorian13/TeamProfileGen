@@ -2,7 +2,7 @@ const Employee = require("../lib/Employee");
 
 test("start employee instance", () => {
     const employee = new Employee();
-    expect(ypeof (employee)).toBe("object");
+    expect(typeof (employee)).toBe("object");
 })
 
 test("Return called value of name", () => {
