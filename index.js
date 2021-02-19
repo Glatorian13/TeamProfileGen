@@ -3,7 +3,7 @@ const path = require("path");
 const inquirer = require("inquirer");
 const jest = require("jest");
 const ejs = require("ejs");
-const src = require("./src");
+const src = ("./src");
 //constructor inport
 const Employee = "./lib/Employee";
 const Manager = "./lib/Manager";
@@ -128,14 +128,7 @@ async function run() {
             return `"fas fa-user-graduate mr-2"`;
         } 
     }
-    // function htmlDivs(employee) {
-    //     if(employee.title === "Manager") {
-    //         let htmlTemplate = fs.readFileSync(path.resolve(src, "manager.html"), "utf-8");
-    //         var mHtml = ""
-    //         mHtml = mHtml + htmlTemplate.replace(/{{ name }}/g, manager.getName)
-    //     }
-    // }
-
+    
     //now add html templates
 
     function getCardHtml() {
@@ -145,11 +138,21 @@ async function run() {
             console.log(empArr[j])
             html = html + template.replace(/{{} name }}/g, empArr[j].name)
             .replace(/{{ fasIcon }}/g, fasBadge(empArr[j]))
+            .replace(/{{ title }}/g, empArr[j].title)
+            .replace(/{{ id }}/g, empArr[j].id)
+            .replace(/{{ email }}/g, empArr[j].email)
+            .replace(/{{ displayTitle(empArr[j]) }}/g, displayTitle(empArr[j]))
             //etc add more
         }
             return html;
     }
     
-    let html = fs.readFileSync(path.resolve(src, "body.html"), "utf-8")
-    .replace(/{{ team }}/g, getCardHtml())
+    let = html2 = "";
+    let template2 = fs.readFileSync(path.resolve(src, "body.html"), "utf-8");
+    html = html + template2.replace(/{{ team }}/g, getCardHtml())
+    fs.writeFile('./dist/index.html', html, function (err) {
+        if (err) throw err;
+        console.log('File is created successfully.');
+    });
 }
+run()
